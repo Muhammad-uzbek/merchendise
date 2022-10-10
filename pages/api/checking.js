@@ -6,7 +6,7 @@ const client = new MongoClient('mongodb+srv://someoniy:uzbeK2003@cluster0.ry32y.
 
 export default async function handler(req, res) {
   if(req.method == 'POST') {
-    if(req.body.log == 'login' && req.body.password == 'password') {
+    if((req.body.log == 'login' && req.body.password == 'password')||(req.log == 'login' && req.password == 'password')) {
         await client.connect();
         req.dbClient = client;
         req.db = client.db('merchendise');
