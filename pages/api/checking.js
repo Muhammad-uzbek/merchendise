@@ -6,12 +6,12 @@ const client = new MongoClient('mongodb+srv://someoniy:uzbeK2003@cluster0.ry32y.
 
 export default async function handler(req, res) {
   if(req.method == 'POST') {
-    if((req.body.log == 'login' && req.body.password == 'password')||(req.log == 'login' && req.password == 'password')) {
+    if((req.body.log == 'login' && req.body.password == 'password')||(req.data.log == 'login' && req.data.password == 'password')) {
         await client.connect();
         req.dbClient = client;
         req.db = client.db('merchendise');
         const collection = req.db.collection('visitreport');
-        console.log(req.body)
+        console.log(req.body);
         const result = await collection.insertOne(JSON.parse(req.body.values));
         return res.status( 200 ).json(result);
     }
