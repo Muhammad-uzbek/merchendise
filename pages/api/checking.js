@@ -16,6 +16,7 @@ export default async function handler(req, res) {
         return res.status( 200 ).json(result);
     }
     else {
+        console.log(req);
         return res.status( 200 ).json({"status": "not logging"});
     }
   }
