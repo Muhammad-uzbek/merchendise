@@ -8,8 +8,8 @@ const Post = () => {
     const [imgSrc, setImgSrc] = React.useState(null);
     const videoConstraints = {
         facingMode: { exact: "environment" },
-        width: 1280,
-        height: 720,
+        width: 1080,
+        height: 1920,
       };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
@@ -28,7 +28,7 @@ const Post = () => {
             <div className="cont">
                    
                 
-                <div className="cont-bef">
+                <div className="cont-bef imgs">
                     <p>Photo before</p>
                     {imgSrc && (
                         <img
@@ -36,10 +36,10 @@ const Post = () => {
                         />
                     )}
                 </div>
-                <div className="cont-bef">
+                <div className="cont-bef camerabtn">
                    <button onClick={capture} className="btn"></button> 
                 </div>
-                <div className="cont-bef">
+                <div className="cont-bef imgs">
                     <p>Photo after</p>
                     {imgSrc && (
                         <img
