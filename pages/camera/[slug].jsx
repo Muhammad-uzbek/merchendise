@@ -6,7 +6,9 @@ const Post = () => {
     const { slug } = router.query
     const webcamRef = React.useRef(null);
     const [imgSrc, setImgSrc] = React.useState(null);
-
+    const videoConstraints = {
+        facingMode: { exact: "environment" }
+      };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgSrc(imageSrc);
@@ -18,6 +20,7 @@ const Post = () => {
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
+            videoConstraints={videoConstraints}
             />
             <button onClick={capture}>Capture photo {slug}</button>
             {imgSrc && (
