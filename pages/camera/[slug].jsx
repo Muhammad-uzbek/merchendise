@@ -18,16 +18,15 @@ const Post = () => {
     
     return (
         <main className="cover">
-            <div className="camera">
-
-            </div>
-            <div className="cont">
-                <Webcam
+            <Webcam
                     audio={false}
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
                     videoConstraints={videoConstraints}
-                />     
+                    className="camera"
+            />  
+            <div className="cont">
+                   
                 
                 <div className="cont-bef">
                     <p>Photo before</p>
