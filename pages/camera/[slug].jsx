@@ -7,7 +7,9 @@ const Post = () => {
     const webcamRef = React.useRef(null);
     const [imgSrc, setImgSrc] = React.useState(null);
     const videoConstraints = {
-        facingMode: { exact: "environment" }
+        facingMode: { exact: "environment" },
+        width: 1280,
+        height: 720,
       };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
@@ -16,19 +18,17 @@ const Post = () => {
     
     return (
         <main className="cover">
-            <Webcam
-            audio={false}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            videoConstraints={videoConstraints}
-            />
-            <button onClick={capture} style={styles.btn}></button>
-            {imgSrc && (
-                <img
-                    src={imgSrc}
-                />
-            )}
+            <div className="camera">
+
+            </div>
             <div className="cont">
+                <Webcam
+                    audio={false}
+                    ref={webcamRef}
+                    screenshotFormat="image/jpeg"
+                    videoConstraints={videoConstraints}
+                />     
+                
                 <div className="cont-bef">
                     <p>Photo before</p>
                     {imgSrc && (
@@ -36,6 +36,9 @@ const Post = () => {
                             src={imgSrc}
                         />
                     )}
+                </div>
+                <div className="cont-bef">
+                   <button onClick={capture} className="btn"></button> 
                 </div>
                 <div className="cont-bef">
                     <p>Photo after</p>
@@ -55,7 +58,7 @@ const styles = {
         width: 50,
         height: 50,
         borderRadius: 25,
-        boxShadow: '0px 0px 0px 6px rgba(237,237,237,0.5)'
+        boxShadow: '0px 0px 0px 6px rgba(237,237,237,0.5)',
     },
     cover:{
         backgroundColor: 'black',
