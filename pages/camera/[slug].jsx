@@ -15,24 +15,58 @@ const Post = () => {
     }, [webcamRef, setImgSrc]);
     
     return (
-        <>
+        <main className="cover">
             <Webcam
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             videoConstraints={videoConstraints}
             />
-            <button onClick={capture}>Capture photo {slug}</button>
+            <button onClick={capture} style={styles.btn}></button>
             {imgSrc && (
-            <img
-                src={imgSrc}
-            />
+                <img
+                    src={imgSrc}
+                />
             )}
-        </>
+            <div className="cont">
+                <div className="cont-bef">
+                    <p>Photo before</p>
+                    {imgSrc && (
+                        <img
+                            src={imgSrc}
+                        />
+                    )}
+                </div>
+                <div className="cont-bef">
+                    <p>Photo after</p>
+                    {imgSrc && (
+                        <img
+                            src={imgSrc}
+                        />
+                    )}
+                </div>
+            </div>
+        </main>
     );
 }
-  
-export default Post
+const styles = {
+    btn:{
+        backgroundColor: 'white',
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        boxShadow: '0px 0px 0px 6px rgba(237,237,237,0.5)'
+    },
+    cover:{
+        backgroundColor: 'black',
+        height:'100vh',
+        disylay: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column', 
+    }
+}
+export default Post;
+
 // export async function getStaticPaths() {
 //     return {
 //         paths: {
