@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@uppy/webcam": "^3.2.0",
     "mongodb": "^4.10.0",
     "next": "12.3.1",
     "pg": "^8.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-webcam": "^7.0.1",
     "sequelize": "^6.24.0"
   },
   "devDependencies": {

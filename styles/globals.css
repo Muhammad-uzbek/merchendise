@@ -14,13 +14,28 @@ a {
 * {
   box-sizing: border-box;
 }
+.aws-btn {
 
+  --slider-height-percentage: 60%;
+  --slider-transition-duration: 670ms;
+  --organic-arrow-thickness: 6px;
+  --organic-arrow-border-radius: 20px;
+  --organic-arrow-height: 33px;
+  --organic-arrow-color: #00187a;
+  --control-button-width: 5%;
+  --control-button-height: 25%;
+  --control-button-background: transparent;
+  --control-bullet-color: #042567;
+  --control-bullet-active-color: #00187a;
+  --loader-bar-color: #851515;
+  --loader-bar-height: 3px;
+  }
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
   body {
-    color: white;
-    background: black;
+    color: rgb(0, 0, 0);
+    background: rgb(223, 223, 223);
   }
 }
