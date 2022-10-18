@@ -11,12 +11,12 @@ const Post = () => {
     const [user, setUser] = useState(null);
     const videoConstraints = {
         facingMode: { exact: "environment" },
-        width: 1920,
+        width: 1080,
         height: 720,
       };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        if(imgSrcBefore){
+        if(typeof imgSrcBefore == "string") {
             setImgSrcAfter(imageSrc)
         }else{
             setImgSrcBefore(imageSrc)
@@ -44,7 +44,7 @@ const Post = () => {
             />  
             <div className="cont">
                 <div className="cont-bef imgs">
-                    <p>{imgSrcBefore}</p>
+                    <p>Photo before</p>
                     {imgSrcBefore && (
                         <img
                             src={imgSrcBefore}
