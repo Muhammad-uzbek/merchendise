@@ -8,6 +8,7 @@ const Post = () => {
     const webcamRef = React.useRef(null);
     const [imgSrcBefore, setImgSrcBefore] = React.useState(null);
     const [imgSrcAfter, setImgSrcAfter] = React.useState(null);
+    const [step, setStep] = useState(1);
     const [user, setUser] = useState(null);
     const videoConstraints = {
         facingMode: { exact: "environment" },
@@ -16,12 +17,14 @@ const Post = () => {
       };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        if(imgSrcBefore !== null) {
-            setImgSrcAfter(imageSrc)
-        }else{
-            setImgSrcBefore(imageSrc)
-        }
-    }, [webcamRef, setImgSrcBefore, setImgSrcAfter]);
+        setStep(2)
+        setImgSrcBefore(imageSrc)
+    }, [webcamRef, setImgSrcBefore]);
+    const capture2 = React.useCallback(() => {
+        const imageSrc = webcamRef.current.getScreenshot();
+        setStep(3)
+        setImgSrcAfter(imageSrc)
+    }, [webcamRef, setImgSrcAfter]);
     useEffect(()=>{
         console.log(slug);
         fetch("/api/merch")
@@ -52,7 +55,7 @@ const Post = () => {
                     )}
                 </div>
                 <div className="cont-bef camerabtn">
-                   <button onClick={capture} className="btn"></button> 
+                   <button onClick={step == 2 ? capture2 : capture} className="btn">{step}</button> 
                 </div>
                 <div className="cont-bef imgs">
                     <p>Photo after</p>
