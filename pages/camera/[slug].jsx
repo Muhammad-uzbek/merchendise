@@ -6,8 +6,8 @@ const Post = () => {
     const router = useRouter()
     const { slug } = router.query
     const webcamRef = React.useRef(null);
-    const [imgSrcBefore, setImgSrcBefore] = React.useState("https://i.pinimg.com/originals/8c/34/38/8c34389ca5f37cb36c8f353ed8698129.jpg");
-    const [imgSrcAfter, setImgSrcAfter] = React.useState("https://i.pinimg.com/originals/b0/a0/05/b0a005e6700f518940827c449535b062.jpg");
+    const [imgSrcBefore, setImgSrcBefore] = React.useState(null);
+    const [imgSrcAfter, setImgSrcAfter] = React.useState(null);
     const [user, setUser] = useState(null);
     const videoConstraints = {
         facingMode: { exact: "environment" },
