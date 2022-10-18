@@ -11,12 +11,12 @@ const Post = () => {
     const [user, setUser] = useState(null);
     const videoConstraints = {
         facingMode: { exact: "environment" },
-        width: 1080,
+        width: 720,
         height: 1920,
       };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        if(imageSrc){
+        if(imgSrcBefore){
             setImgSrcAfter(imageSrc)
         }else{
             setImgSrcBefore(imageSrc)
