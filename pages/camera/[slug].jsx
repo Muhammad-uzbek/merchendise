@@ -1,12 +1,13 @@
 import { useRouter } from "next/router";
 import Webcam from "react-webcam";
 import React, { useState, useRef, useEffect } from "react";
+
 const Post = () => {
     const router = useRouter()
     const { slug } = router.query
     const webcamRef = React.useRef(null);
-    const [imgSrc, setImgSrc] = React.useState(null);
-
+    const [imgSrcBefore, setImgSrcBefore] = React.useState("https://i.pinimg.com/originals/8c/34/38/8c34389ca5f37cb36c8f353ed8698129.jpg");
+    const [imgSrcAfter, setImgSrcAfter] = React.useState("https://i.pinimg.com/originals/b0/a0/05/b0a005e6700f518940827c449535b062.jpg");
     const [user, setUser] = useState(null);
     const videoConstraints = {
         facingMode: { exact: "environment" },
@@ -15,17 +16,23 @@ const Post = () => {
       };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        setImgSrc(imageSrc);
-    }, [webcamRef, setImgSrc]);
+        if(imageSrc){
+            setImgSrcAfter(imageSrc)
+        }else{
+            setImgSrcBefore(imageSrc)
+        }
+    }, [webcamRef, setImgSrcBefore, setImgSrcAfter]);
     useEffect(()=>{
+        console.log(slug);
         fetch("/api/merch")
         .then(resp => resp.json())
         .then(response => {
-            response.map(item =>{
-                if(slug == item.userId) setUser(item)
+            let finded = response.find(el=>{
+                return el.userId == slug
             })
+            setUser(finded || {fname:"Topilmadi"});
         });
-    },[])
+    },[slug])
     return (
         <main className="cover">
             <Webcam
@@ -38,9 +45,9 @@ const Post = () => {
             <div className="cont">
                 <div className="cont-bef imgs">
                     <p>Photo before</p>
-                    {imgSrc && (
+                    {imgSrcBefore && (
                         <img
-                            src={imgSrc}
+                            src={imgSrcBefore}
                         />
                     )}
                 </div>
@@ -49,9 +56,9 @@ const Post = () => {
                 </div>
                 <div className="cont-bef imgs">
                     <p>Photo after</p>
-                    {imgSrc && (
+                    {imgSrcAfter && (
                         <img
-                            src={imgSrc}
+                            src={imgSrcAfter}
                         />
                     )}
                 </div>
@@ -62,22 +69,7 @@ const Post = () => {
         </main>
     );
 }
-const styles = {
-    btn:{
-        backgroundColor: 'white',
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-        boxShadow: '0px 0px 0px 6px rgba(237,237,237,0.5)',
-    },
-    cover:{
-        backgroundColor: 'black',
-        height:'100vh',
-        disylay: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column', 
-    }
-}
+
 export default Post;
 
 // export async function getStaticPaths() {
