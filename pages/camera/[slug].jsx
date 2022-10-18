@@ -16,7 +16,7 @@ const Post = () => {
       };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        if(typeof imgSrcBefore == "string") {
+        if(imgSrcBefore !== null) {
             setImgSrcAfter(imageSrc)
         }else{
             setImgSrcBefore(imageSrc)
