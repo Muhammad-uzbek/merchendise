@@ -24,14 +24,22 @@ const Post = () => {
         formdata.append("demo_image", imageSrc);
         setStep(2)
         setImgSrcBefore(imageSrc)
-        setErrrs(imageSrc)
+        setErrrs(dataURItoBlob(imageSrc))
     }, [webcamRef, setImgSrcBefore]);
     const capture2 = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setStep(3)
         setImgSrcAfter(imageSrc)
-        setErrrs(imageSrc)
+        setErrrs(dataURItoBlob(imageSrc))
     }, [webcamRef, setImgSrcAfter]);
+    function dataURItoBlob(dataURI) {
+        var binary = atob(dataURI.split(',')[1]);
+        var array = [];
+        for(var i = 0; i < binary.length; i++) {
+            array.push(binary.charCodeAt(i));
+        }
+        return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
+    }
     const upload = async () => {
         formdata.append("demo_image", imgSrcBefore);
         
