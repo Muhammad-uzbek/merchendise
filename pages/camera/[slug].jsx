@@ -8,10 +8,10 @@ const Post = () => {
     const router = useRouter()
     const { slug } = router.query
     const webcamRef = React.useRef(null);
-    const [imgSrcBefore, setImgSrcBefore] = React.useState("/C:/Users/PK/Downloads/dellest.png");
+    const [imgSrcBefore, setImgSrcBefore] = React.useState(null);
     const [imgBeforeBase64, setImgBeforeBase64] = React.useState(null);
-    const [imgSrcAfter, setImgSrcAfter] = React.useState("/images/mount.png");
-    const [step, setStep] = useState(3);
+    const [imgSrcAfter, setImgSrcAfter] = React.useState(null);
+    const [step, setStep] = useState(1);
     const [user, setUser] = useState(null);
     var formdata = new FormData();
     const videoConstraints = {
