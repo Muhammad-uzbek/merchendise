@@ -9,7 +9,7 @@ const Post = () => {
     const { slug } = router.query
     const webcamRef = React.useRef(null);
     const [imgSrcBefore, setImgSrcBefore] = React.useState(null);
-    const [imgBeforeBase64, setImgBeforeBase64] = React.useState(null);
+    const [errrs, setErrrs] = React.useState(null);
     const [imgSrcAfter, setImgSrcAfter] = React.useState(null);
     const [step, setStep] = useState(1);
     const [user, setUser] = useState(null);
@@ -24,11 +24,13 @@ const Post = () => {
         formdata.append("demo_image", imageSrc);
         setStep(2)
         setImgSrcBefore(imageSrc)
+        setErrrs(imageSrc)
     }, [webcamRef, setImgSrcBefore]);
     const capture2 = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setStep(3)
         setImgSrcAfter(imageSrc)
+        setErrrs(imageSrc)
     }, [webcamRef, setImgSrcAfter]);
     const upload = async () => {
         formdata.append("demo_image", imgSrcBefore);
@@ -39,10 +41,15 @@ const Post = () => {
           redirect: 'follow'
         };
         
-        fetch("http://164.92.248.91:3096/imageserver/image", requestOptions)
+        await fetch("http://164.92.248.91:3096/imageserver/image", requestOptions)
           .then(response => response.json())
-          .then(result => setUser({fname:result+"||"+imgSrcBefore}))
-          .catch(error => console.log('error', error));
+          .then(result => {
+            ({fname:result+"||"+imgSrcBefore});
+            setErrrs(result+"||"+imgSrcBefore);
+          })
+          .catch(error => {
+            setErrrs(error);
+          });
     }
 
     useEffect(()=>{
@@ -65,6 +72,11 @@ const Post = () => {
                     videoConstraints={videoConstraints}
                     className="camera"
             />  
+            <div className="errs">
+                {
+                    errrs
+                }
+            </div>
             <div className="cont">
                 <div className="cont-bef imgs">
                     <p>Photo before</p>
