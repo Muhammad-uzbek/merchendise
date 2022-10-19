@@ -1,17 +1,19 @@
 import { useRouter } from "next/router";
 import Webcam from "react-webcam";
 import React, { useState, useRef, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import FormData from 'form-data';
 
 const Post = () => {
     const router = useRouter()
     const { slug } = router.query
     const webcamRef = React.useRef(null);
-    const [imgSrcBefore, setImgSrcBefore] = React.useState(null);
-    const [imgSrcAfter, setImgSrcAfter] = React.useState(null);
-    const [step, setStep] = useState(1);
+    const [imgSrcBefore, setImgSrcBefore] = React.useState("/C:/Users/PK/Downloads/dellest.png");
+    const [imgBeforeBase64, setImgBeforeBase64] = React.useState(null);
+    const [imgSrcAfter, setImgSrcAfter] = React.useState("/images/mount.png");
+    const [step, setStep] = useState(3);
     const [user, setUser] = useState(null);
+    var formdata = new FormData();
     const videoConstraints = {
         facingMode: { exact: "environment" },
         width: 1080,
@@ -19,6 +21,7 @@ const Post = () => {
       };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
+        formdata.append("demo_image", imageSrc);
         setStep(2)
         setImgSrcBefore(imageSrc)
     }, [webcamRef, setImgSrcBefore]);
@@ -28,23 +31,18 @@ const Post = () => {
         setImgSrcAfter(imageSrc)
     }, [webcamRef, setImgSrcAfter]);
     const upload = async () => {
-        var data = new FormData();
-        data.append('demo_image', imgSrcBefore);
-        var config = {
-        method: 'post',
-        url: 'http://164.92.248.91:3096/imageserver/image',
-        headers: { 
-            ...data.getHeaders()
-        },
-        data : data
+        formdata.append("demo_image", imgSrcBefore);
+        
+        var requestOptions = {
+          method: 'POST',
+          body: formdata,
+          redirect: 'follow'
         };
-        axios(config)
-        .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
+        
+        fetch("http://164.92.248.91:3096/imageserver/image", requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
     }
 
     useEffect(()=>{
