@@ -40,8 +40,8 @@ const Post = () => {
         };
         
         fetch("http://164.92.248.91:3096/imageserver/image", requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
+          .then(response => response.json())
+          .then(result => setUser({fname:result}))
           .catch(error => console.log('error', error));
     }
 
