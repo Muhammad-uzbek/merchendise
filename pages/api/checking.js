@@ -6,7 +6,7 @@ const client = new MongoClient('mongodb+srv://someoniy:uzbeK2003@cluster0.ry32y.
 
 export default async function handler(req, res) {
   if(req.method == 'POST') {
-    if((req.body.log == 'login' && req.body.password == 'password')||(req.data.log == 'login' && req.data.password == 'password')) {
+    if((req.body.log == 'login' && req.body.password == 'password')) {
         await client.connect();
         req.dbClient = client;
         req.db = client.db('merchendise');
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     await client.connect();
     const db = client.db("merchendise");
     const collection = db.collection("visitreport");
-    const merchs = await collection.find(req.body).toArray();
+    const merchs = await collection.find({}).toArray();
     res.status(200).json(merchs);
   }
 }

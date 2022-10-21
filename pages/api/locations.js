@@ -10,7 +10,8 @@ export default async function handler(req, res) {
     req.dbClient = client;
     req.db = client.db('merchendise');
     const collection = req.db.collection('locations');
-    const result = await collection.insertOne(JSON.parse(req.body));
+    console.log(req.body);
+    const result = await collection.insertOne(req.body);
     return res.status( 200 ).json(result);
   }
   else{

@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     await client.connect();
     req.dbClient = client;
     req.db = client.db('merchendise');
-    const collection = req.db.collection('merchendisers');
+    const collection = req.db.collection('clients');
     // check if req body is json, if not, parse it
     const result = await collection.insertOne(req.body);
     return res.status( 200 ).json({
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
   else{
     await client.connect();
     const db = client.db("merchendise");
-    const collection = db.collection("merchendisers");
+    const collection = db.collection("clients");
     const merchs = await collection.find(req.body).toArray();
     res.status(200).json(merchs);
   }
