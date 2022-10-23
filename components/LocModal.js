@@ -42,7 +42,7 @@ export const LocModal = ({isOpen, closer, lengthLocs}) =>{
         >
             <Modal.Header>
                 <Text id="modal-title" size={18}>
-                    Yangi lokatsiya qo'shish
+                    Yangi lokatsiya qo&apos;shish
                 </Text>
             </Modal.Header>
             <Modal.Body>
