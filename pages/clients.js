@@ -104,7 +104,7 @@ export default function App() {
         </Navbar.Content>
       </Navbar>
         <Button color="#A66908" shadow bordered rounded onPress={() => opencloseHandler(true)}>
-          Qo'shish
+          Qoshish
         </Button>
         <Table
         aria-label="Example table with custom cells"
