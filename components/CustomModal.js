@@ -39,7 +39,7 @@ export const CustomModal = ({isOpen, closer, lengthUsers}) =>{
         >
             <Modal.Header>
                 <Text id="modal-title" size={18}>
-                    Yangi merchendiser qo'shish
+                    Yangi merchendiser qo&apos;shish
                 </Text>
             </Modal.Header>
             <Modal.Body>
