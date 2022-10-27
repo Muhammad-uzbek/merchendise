@@ -94,7 +94,7 @@ export default function App() {
         <Navbar isCompact isBordered variant="floating" maxWidth={"sm"} css={{zIndex: 500, paddingBottom: 50}}>
         <Navbar.Brand>
           <Text b color="inherit" hideIn="xs">
-            Merch
+            Merch Admin
           </Text>
         </Navbar.Brand>
         <Navbar.Content hideIn="xs" variant="underline" activeColor={"warning"}>
