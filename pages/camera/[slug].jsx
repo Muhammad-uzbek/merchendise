@@ -23,7 +23,8 @@ const Post = () => {
         const imageSrc = webcamRef.current.getScreenshot();
         formdata.append("demo_image", imageSrc);
         setStep(2)
-        setImgSrcBefore(imageSrc);
+        setImgSrcBefore(imageSrc)
+        upload();
     }, [webcamRef, setImgSrcBefore]);
     const capture2 = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
