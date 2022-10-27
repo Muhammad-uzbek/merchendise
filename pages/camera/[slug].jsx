@@ -51,11 +51,10 @@ const Post = () => {
         await fetch("http://164.92.248.91:3096/imageserver/image", requestOptions)
           .then(response => response.json())
           .then(result => {
-            ({fname:result+"||"+imgSrcBefore});
-            setErrrs(result+"||"+imgSrcBefore);
+            setUser({fname:result+"||"+imgSrcBefore});
           })
           .catch(error => {
-            setErrrs(error);
+            console.log(error);
           });
     }
 
