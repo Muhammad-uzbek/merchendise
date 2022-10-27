@@ -73,7 +73,7 @@ const Post = () => {
             />  
             <div className="errs">
                 {
-                    errrs && return (
+                    errrs && (
                         <p>
                             {JSON.stringify(errrs)}
                         </p>
