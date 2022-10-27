@@ -42,7 +42,6 @@ const Post = () => {
     }
     const upload = async () => {
         formdata.append("demo_image", imgSrcBefore);
-        
         var requestOptions = {
           method: 'POST',
           body: formdata,
