@@ -33,23 +33,22 @@ const Post = () => {
     }, [webcamRef, setImgSrcAfter]);
     
     const upload = async () => {
+        // upload base64 image to server with axios
         formdata.append("demo_image", imgSrcBefore);
-        var requestOptions = {
-          method: 'POST',
-          body: formdata,
-          redirect: 'follow'
-        };
-        
-        await fetch("http://164.92.248.91:3096/imageserver/image", requestOptions)
-          .then(response => response.json())
-          .then(result => {
-            console.log(result);
-            setErrrs(result);
-          })
-          .catch(error => {
-            console.log(error);
-            setErrrs(error);
-          });
+        try {
+            const response = await axios.post(
+                "http://164.92.248.91:3096/imageserver/image",
+                formdata,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            setErrrs(response.data);
+        } catch (error) {
+            setErrrs(error.response.data);
+        }
     }
 
     useEffect(()=>{
