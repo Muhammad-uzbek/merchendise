@@ -22,6 +22,7 @@
     "pg": "^8.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-html5-camera-photo": "^1.5.10",
     "react-webcam": "^7.0.1",
     "sequelize": "^6.24.0",
     "tls": "^0.0.1",
