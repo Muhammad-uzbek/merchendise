@@ -3,7 +3,6 @@ import Webcam from "react-webcam";
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import FormData from 'form-data';
-import Camera from 'react-html5-camera-photo';
 
 const Post = () => {
     const router = useRouter()
@@ -20,19 +19,13 @@ const Post = () => {
         width: 1080,
         height: 720,
       };
-    // const capture = React.useCallback(() => {
-    //     const imageSrc = webcamRef.current.getScreenshot();
-    //     formdata.append("demo_image", imageSrc);
-    //     setStep(2)
-    //     setImgSrcBefore(imageSrc)
-    //     upload();
-    // }, [webcamRef, setImgSrcBefore]);
-    function capture(dataUri){
-        formdata.append("demo_image", dataUri);
+    const capture = React.useCallback(() => {
+        const imageSrc = webcamRef.current.getScreenshot();
+        formdata.append("demo_image", imageSrc);
         setStep(2)
-        setImgSrcBefore(dataUri)
+        setImgSrcBefore(imageSrc)
         upload();
-    }
+    }, [webcamRef, setImgSrcBefore]);
     const capture2 = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setStep(3)
@@ -41,9 +34,10 @@ const Post = () => {
     
     const upload = async () => {
         // upload base64 image to server with axios
+        formdata.append("demo_image", imgSrcBefore);
         try {
             const response = await axios.post(
-                "http://164.92.248.91:3096/imageserver/image",
+                "/api/camera",
                 formdata,
                 {
                     headers: {
@@ -70,16 +64,13 @@ const Post = () => {
     },[slug])
     return (
         <main className="cover">
-            {/* <Webcam
+            <Webcam
                     audio={false}
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
                     videoConstraints={videoConstraints}
                     className="camera"
-            />   */}
-            <Camera
-                onTakePhoto = { (dataUri) => { capture(dataUri); } }
-            />
+            />  
             <div className="errs">
                 {
                     errrs && (
