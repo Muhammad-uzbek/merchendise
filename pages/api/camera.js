@@ -21,7 +21,7 @@ export default async (req, res) => {
         data : data
     };
     console.log(data);
-    console.log(configimg);
+    console.log(configimg || "wttff");
     axios(configimg)
     .then(function (response) {
         res.status(200).json(response.data);

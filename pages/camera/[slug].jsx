@@ -38,6 +38,7 @@ const Post = () => {
         },
         redirect: 'follow'
         };
+        console.log(requestOptions);
         fetch("/api/camera", requestOptions)
         .then(response => response.json())
         .then(result => {
