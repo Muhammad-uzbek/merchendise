@@ -12,7 +12,7 @@ export const config = {
 export default async (req, res) => {
     // import api call from front-end and send it to the server
     var data = req.body;
-    var config = {
+    var configimg = {
     method: 'post',
     url: 'http://164.92.248.91:3096/imageserver/image',
     headers: { 
@@ -20,12 +20,14 @@ export default async (req, res) => {
     },
         data : data
     };
-    axios(config)
+    console.log(data);
+    console.log(configimg);
+    axios(configimg)
     .then(function (response) {
         res.status(200).json(response.data);
     })
     .catch(function (error) {
-    console.log(error);
+        console.log(error);
     });
 };
 

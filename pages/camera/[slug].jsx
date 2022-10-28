@@ -33,7 +33,9 @@ const Post = () => {
         var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: formdata,
+        body: {
+            demo_image: fileOfImage
+        },
         redirect: 'follow'
         };
         fetch("/api/camera", requestOptions)
