@@ -10,14 +10,13 @@ export const config = {
 
 const post = async (req, res) => {
     const form = new formidable.IncomingForm();
-    form.parse(req, async (err, fields, files) => {
-        if (err) {
-            console.error("Error", err);
-            throw err;
-        }
-        let result = await axios.post("http://164.92.248.91:3096/imageserver/image", files);
-        res.status(200).json(result);
+   let result = await axios.post("http://164.92.248.91:3096/imageserver/image", req.body, {
+    headers: {
+        "Content-Type": "multipart/form-data"
+    }
     });
+    console.log(result);
+    res.status(200).json(result);
 };
 
 const saveFile = async (file) => {
