@@ -21,10 +21,11 @@ const Post = () => {
       };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
+        setImgSrcBefore(imageSrc);
         let fileOfImage = new File([imageSrc], "image.png", {
             type: "image/png",
         });
-        
+        console.log(fileOfImage);
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Basic e3thcGlfa2V5fX06e3thcGlfc2VjcmV0fX0=");
         var formdata = new FormData();
