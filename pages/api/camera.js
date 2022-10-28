@@ -1,6 +1,7 @@
 import axios from "axios";
 import formidable from "formidable";
 import fs from "fs";
+import { runInNewContext } from "vm";
 
 export const config = {
   api: {
@@ -8,15 +9,24 @@ export const config = {
   }
 };
 
-const post = async (req, res) => {
-    const form = new formidable.IncomingForm();
-   let result = await axios.post("http://164.92.248.91:3096/imageserver/image", req.body, {
-    headers: {
-        "Content-Type": "multipart/form-data"
-    }
+export default async (req, res) => {
+    // import api call from front-end and send it to the server
+    var data = req.body;
+    var config = {
+    method: 'post',
+    url: 'http://164.92.248.91:3096/imageserver/image',
+    headers: { 
+        'Content-Type': 'multipart/form-data'
+    },
+        data : data
+    };
+    axios(config)
+    .then(function (response) {
+        res.status(200).json(response.data);
+    })
+    .catch(function (error) {
+    console.log(error);
     });
-    console.log(result);
-    res.status(200).json(result);
 };
 
 const saveFile = async (file) => {
@@ -28,16 +38,4 @@ const saveFile = async (file) => {
     }).then((res) => {
         console.log(res);
     });
-};
-
-export default (req, res) => {
-  req.method === "POST"
-    ? post(req, res)
-    : req.method === "PUT"
-    ? console.log("PUT")
-    : req.method === "DELETE"
-    ? console.log("DELETE")
-    : req.method === "GET"
-    ? console.log("GET")
-    : res.status(404).send("");
 };
