@@ -21,10 +21,37 @@ const Post = () => {
       };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        formdata.append("demo_image", imageSrc);
+        formdata.append("upload_preset", imageSrc);
         setStep(2)
         setImgSrcBefore(imageSrc)
-        upload();
+        try{
+            axios.post('https://api.cloudinary.com/v1_1/merchuz/image/upload', formdata, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(res => {
+                console.log(res.data)
+                setImgSrcAfter(res.data.secure_url)
+            })
+        }
+        catch(err){
+            console.log(err)
+        }
+        // try {
+        //     const response = axios.post(
+        //         "/api/camera",
+        //         formdata,
+        //         {
+        //             headers: {
+        //                 "Content-Type": "multipart/form-data",
+        //             },
+        //         }
+        //     );
+        //     setErrrs(response.data);
+        // } catch (error) {
+        //     setErrrs(error.response.data);
+        // }
     }, [webcamRef, setImgSrcBefore]);
     const capture2 = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
@@ -34,7 +61,6 @@ const Post = () => {
     
     const upload = async () => {
         // upload base64 image to server with axios
-        formdata.append("demo_image", imgSrcBefore);
         try {
             const response = await axios.post(
                 "/api/camera",
