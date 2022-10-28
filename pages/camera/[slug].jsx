@@ -21,26 +21,25 @@ const Post = () => {
       };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        formdata.append("file", imageSrc);
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Basic e3thcGlfa2V5fX06e3thcGlfc2VjcmV0fX0=");
+
+        var formdata = new FormData();
+        formdata.append("file", imageSrc, "file.jpg");
+        formdata.append("upload_preset", "vhpnppbz");
         formdata.append("public_id", "dprnf1l4k");
-        formdata.append("api_key", 284726551612739);
-        formdata.append("timestamp", new Date().getTime());
-        setStep(2)
-        setImgSrcBefore(imageSrc)
-        try{
-            axios.post('https://api.cloudinary.com/v1_1/merchuz/image/upload', formdata, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-            .then(res => {
-                console.log(res.data)
-                setImgSrcAfter(res.data.secure_url)
-            })
-        }
-        catch(err){
-            console.log(err)
-        }
+        formdata.append("api_key", "284726551612739");
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow'
+        };
+        fetch("https://api.cloudinary.com/v1_1/dprnf1l4k/image/upload", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
         // try {
         //     const response = axios.post(
         //         "/api/camera",
