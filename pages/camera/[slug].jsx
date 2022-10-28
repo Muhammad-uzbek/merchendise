@@ -39,10 +39,11 @@ const Post = () => {
         body: formdata,
         redirect: 'follow'
         };
-        fetch("https://api.cloudinary.com/v1_1/dprnf1l4k/image/upload", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        fetch("/api/camera", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+        })
 
         // try {
         //     const response = axios.post(

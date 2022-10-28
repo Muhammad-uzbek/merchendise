@@ -8,12 +8,17 @@ export const config = {
 };
 
 const post = async (req, res) => {
-  const form = new formidable.IncomingForm();
+    const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields, files) => {
-        console.log(fields);
-        console.log(files);
+        if (err) {
+        console.error("Error", err);
+        throw err;
+        }
+        console.log("Fields", fields);
+        console.log("Files", files);
+        await saveFile(files.image);
+        res.status(200).end();
     });
-    res.status(200).json({ message: "OK" });
 };
 
 const saveFile = async (file) => {
