@@ -29,10 +29,7 @@ const Post = () => {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Basic e3thcGlfa2V5fX06e3thcGlfc2VjcmV0fX0=");
         var formdata = new FormData();
-        formdata.append("image", fileOfImage);
-        formdata.append("upload_preset", "vhpnppbz");
-        formdata.append("public_id", "dprnf1l4k");
-        formdata.append("api_key", "284726551612739");
+        formdata.append("demo_image", fileOfImage);
         var requestOptions = {
         method: 'POST',
         headers: myHeaders,
