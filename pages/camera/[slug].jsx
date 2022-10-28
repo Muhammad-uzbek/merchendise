@@ -21,7 +21,11 @@ const Post = () => {
       };
     const capture = React.useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        formdata.append("upload_preset", imageSrc);
+        formdata.append("file", imageSrc);
+        formdata.append("public_id", "dprnf1l4k");
+        formdata.append("signature", 
+        formdata.append("api_key", 284726551612739);
+        formdata.append("timestamp", new Date().getTime());
         setStep(2)
         setImgSrcBefore(imageSrc)
         try{
