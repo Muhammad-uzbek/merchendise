@@ -16,7 +16,15 @@ export default async (req, res) => {
         form.parse(req, (err, fields, files) => {
             console.log(req.body);
             console.log(fields);
-            saveFile(files.demo_image.path);
+            // upload file to the server with axios
+            axios.post("http://164.92.248.91:3096/imageserver/image", files, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+                }).then((res) => {
+                    console.log(res);
+                }
+            );
         });
         res.status(200).json({message: 'ok'});
     }
