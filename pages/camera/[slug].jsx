@@ -25,25 +25,19 @@ const Post = () => {
         let fileOfImage = new File([imageSrc], "image.png", {
             type: "image/png",
         });
-        console.log(fileOfImage);
-        var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Basic e3thcGlfa2V5fX06e3thcGlfc2VjcmV0fX0=");
-        var formdata = new FormData();
         formdata.append("demo_image", fileOfImage);
-        var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: {
-            demo_image: fileOfImage
-        },
-        redirect: 'follow'
-        };
-        console.log(requestOptions);
-        fetch("/api/camera", requestOptions)
-        .then(response => response.json())
-        .then(result => {
-            console.log(result);
+        setStep(2);
+        fetch("/api/camera", {
+            method: "POST",
+            body: formdata,
         })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("Success:", result);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
 
         // try {
         //     const response = axios.post(
