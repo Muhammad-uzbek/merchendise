@@ -20,17 +20,18 @@ const Post = () => {
         height: 720,
       };
     const capture = React.useCallback(() => {
-        var formdata = new FormData();
         const imageSrc = webcamRef.current.getScreenshot();
         setImgSrcBefore(imageSrc);
         let fileOfImage = new File([imageSrc], "image.png", {
             type: "image/png",
         });
-        formdata.append("demo_image", fileOfImage);
+        const formData = new FormData();
+        formData.append("demo_image", fileOfImage);
+        formData.append("slug", slug);
         setStep(2);
         fetch("/api/camera", {
             method: "POST",
-            body: formdata,
+            body: formData,
         })
             .then((response) => response.json())
             .then((result) => {
