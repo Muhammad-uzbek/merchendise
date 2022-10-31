@@ -13,13 +13,14 @@ const Post = () => {
     const [imgSrcAfter, setImgSrcAfter] = React.useState(null);
     const [step, setStep] = useState(1);
     const [user, setUser] = useState(null);
-    var formdata = new FormData();
+    
     const videoConstraints = {
         facingMode: { exact: "environment" },
         width: 1080,
         height: 720,
       };
     const capture = React.useCallback(() => {
+        var formdata = new FormData();
         const imageSrc = webcamRef.current.getScreenshot();
         setImgSrcBefore(imageSrc);
         let fileOfImage = new File([imageSrc], "image.png", {
