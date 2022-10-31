@@ -12,29 +12,13 @@ export const config = {
 export default async (req, res) => {
     // import api call from front-end and send it to the server
     if(req.method == 'POST') {
-        console.log(req.data);
-        var data = req.body || req.data;
-        var resp = [{status: "waiting"}];
-        var configimg = {
-        method: 'post',
-        url: 'http://164.92.248.91:3096/imageserver/image',
-        headers: { 
-            'Content-Type': 'multipart/form-data',
-            'Access-Control-Allow-Origin': '*',
-        },
-            data : data
-        };
-        console.log(data);
-        console.log(configimg || "wttff");
-        axios(configimg)
-        .then(function (response) {
-            console.log(JSON.stringify(response.data));
-            resp[0] = response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields, files) => {
+            console.log(req.body);
+            console.log(fields);
+            saveFile(files.demo_image.path);
         });
-        res.status(200).json(resp);
+        res.status(200).json({message: 'ok'});
     }
     else {
         res.status(200).json({"status": "not get"});
