@@ -13,6 +13,7 @@ export default async (req, res) => {
     // import api call from front-end and send it to the server
     if(req.method == 'POST') {
         const form = new formidable.IncomingForm();
+        console.log(req.body|| req.query || req.data);
         form.parse(req, (err, fields, files) => {
             console.log(req.body);
             console.log(fields);
@@ -25,6 +26,9 @@ export default async (req, res) => {
                     console.log(res);
                 }
             );
+            if(err) {
+                console.log(err);
+            }
         });
         res.status(200).json({message: 'ok'});
     }

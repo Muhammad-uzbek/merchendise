@@ -25,13 +25,15 @@ const Post = () => {
         let fileOfImage = new File([imageSrc], "image.png", {
             type: "image/png",
         });
-        const formData = new FormData();
-        formData.append("demo_image", fileOfImage);
-        formData.append("slug", slug);
+        console.log(fileOfImage);
+        const formData = {
+            slug: slug,
+            demo_image: fileOfImage
+        };
         setStep(2);
         fetch("/api/camera", {
             method: "POST",
-            body: formData,
+            body: JSON.stringify(formData),
         })
             .then((response) => response.json())
             .then((result) => {
