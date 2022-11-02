@@ -13,10 +13,11 @@ export default async (req, res) => {
     // import api call from front-end and send it to the server
     if(req.method == 'POST') {
         const form = new formidable.IncomingForm();
-        console.log(req.body|| req.query || req.data);
+        console.log(req.body|| req.data);
         form.parse(req, (err, fields, files) => {
             console.log(req.body);
             console.log(fields);
+            console.log(files);
             // upload file to the server with axios
             axios.post("http://164.92.248.91:3096/imageserver/image", files, {
                 headers: {
