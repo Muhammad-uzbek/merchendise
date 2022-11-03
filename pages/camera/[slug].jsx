@@ -2,8 +2,7 @@ import { useRouter } from "next/router";
 import Webcam from "react-webcam";
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import FormData from 'form-data';
-
+import ''
 const Post = () => {
     const router = useRouter()
     const { slug } = router.query

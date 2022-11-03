@@ -8,6 +8,10 @@ const client = new MongoClient('mongodb+srv://someoniy:uzbeK2003@cluster0.ry32y.
 });
 
 export default async function handler(req, res) {
+  // access allow origin
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   if(req.method == 'POST') {
     await client.connect();
     req.dbClient = client;
